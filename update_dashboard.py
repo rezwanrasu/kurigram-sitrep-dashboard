@@ -11,7 +11,7 @@ from datetime import datetime
 API_TOKEN = "47f1457c09e523c388ec399f53abac0c44b0a0f1"
 ASSET_UID = "avF5RDb7CE4bDugRdwuBwS"
 SERVER    = "kf.kobotoolbox.org"
-OUTPUT    = "Kurigram_Hazard_Dashboard.html"
+OUTPUT = "index.html"
 
 # ── 100% CONFIRMED field names from fields_all.txt ──────────
 
