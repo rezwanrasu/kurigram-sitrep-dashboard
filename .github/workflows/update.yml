@@ -29,9 +29,6 @@ jobs:
       - name: Install Wrangler
         run: npm install -g wrangler
 
-      - name: Install Worker dependencies
-        run: npm install
-
       - name: Deploy to Cloudflare Worker
         run: wrangler deploy --commit-dirty=true
         env:
