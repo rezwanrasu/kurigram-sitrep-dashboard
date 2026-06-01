@@ -127,6 +127,8 @@ body{background:var(--off);color:var(--text);font-family:var(--font);min-height:
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:24px 0}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"><\/script>
 </head>
 <body>
 
@@ -138,9 +140,11 @@ body{background:var(--off);color:var(--text);font-family:var(--font);min-height:
       <div class="topbar-title-bn">কুড়িগ্রাম জেলা — বহুমাত্রিক দুর্যোগ পরিস্থিতি প্রতিবেদন (SITREP)</div>
       <div class="topbar-title-en">Kurigram District Multi-Hazard Situation Report Dashboard</div>
     </div>
-    <div class="topbar-right" style="display:flex;align-items:center">
-      <img src="data:image/webp;base64,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" style="height:38px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9">
-      
+    <div class="topbar-right" style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <div style="text-align:right">
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.06em">সর্বশেষ আপডেট</div>
+        <div style="font-size:12px;color:#99F6E4;font-weight:500" id="update-time">—</div>
+      </div>
     </div>
   </div>
 </div>
@@ -249,6 +253,23 @@ body{background:var(--off);color:var(--text);font-family:var(--font);min-height:
     </table>
   </div>
 
+
+  <!-- LOCATION MAP -->
+  <div class="sec-head">
+    <div class="sec-title">দুর্যোগের অবস্থান <span class="sec-title-bn">Submission Locations — Kurigram District</span></div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="card" style="margin-bottom:20px">
+    <div id="map-container" style="width:100%;height:380px;border-radius:8px;overflow:hidden;background:#EFF6FF;position:relative">
+      <div id="map-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+        <div style="font-size:32px">🗺️</div>
+        <div style="font-size:13px;color:#64748B">Loading map...</div>
+      </div>
+      <div id="map" style="width:100%;height:100%"></div>
+    </div>
+    <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px" id="map-legend"></div>
+  </div>
+
   <!-- ALL SUBMISSIONS -->
   <div class="sec-head">
     <div class="sec-title">সকল প্রতিবেদন <span class="sec-title-bn">All Submissions</span></div>
@@ -288,7 +309,7 @@ body{background:var(--off);color:var(--text);font-family:var(--font);min-height:
 
 <script>
 // ── EMBEDDED DATA ──
-const EMBEDDED = {"kpis": {"submissions": 39, "homes": 1144, "agri": 5339.0, "schools": 120, "deaths": 100, "treated": 671, "livestock": 87, "displaced": 10730}, "upazila": [{"name": "Kurigram Sadar", "submissions": 15, "homes": 49, "agri": 267.0, "schools": 15, "deaths": 99, "treated": 289, "livestock": 61, "displaced": 7117, "flood_villages": 20, "rain_villages": 50}, {"name": "Ulipur", "submissions": 6, "homes": 22, "agri": 103.0, "schools": 11, "deaths": 0, "treated": 90, "livestock": 10, "displaced": 235, "flood_villages": 4, "rain_villages": 56}, {"name": "Nageshwari", "submissions": 7, "homes": 905, "agri": 1100.0, "schools": 2, "deaths": 0, "treated": 240, "livestock": 8, "displaced": 960, "flood_villages": 129, "rain_villages": 118}, {"name": "Rowmari", "submissions": 4, "homes": 168, "agri": 3530.0, "schools": 3, "deaths": 1, "treated": 20, "livestock": 0, "displaced": 1940, "flood_villages": 46, "rain_villages": 28}, {"name": "Bhurungamari", "submissions": 4, "homes": 0, "agri": 0.0, "schools": 0, "deaths": 0, "treated": 0, "livestock": 0, "displaced": 0, "flood_villages": 0, "rain_villages": 25}, {"name": "Chilmari", "submissions": 3, "homes": 0, "agri": 339.0, "schools": 89, "deaths": 0, "treated": 32, "livestock": 8, "displaced": 478, "flood_villages": 0, "rain_villages": 5}], "disaster": [{"name": "Rainfall", "bn": "অতিবৃষ্টি", "color": "#4A90D9", "submissions": 30, "displaced": 1860, "agri": 2566.0, "schools": 0, "treated": 0, "livestock": 0, "homes": 315}, {"name": "Heatwave", "bn": "তাপদাহ", "color": "#E8743B", "submissions": 22, "displaced": 103, "agri": 144.0, "schools": 91, "treated": 103, "livestock": 52, "homes": 0}, {"name": "Cold Wave", "bn": "শৈত্যপ্রবাহ", "color": "#5B8FF9", "submissions": 18, "displaced": 0, "agri": 60.0, "schools": 0, "treated": 258, "livestock": 12, "homes": 0}, {"name": "Drought", "bn": "খরা", "color": "#E84040", "submissions": 20, "displaced": 148, "agri": 287.0, "schools": 15, "treated": 152, "livestock": 23, "homes": 0}, {"name": "Flood", "bn": "বন্যা", "color": "#2ECC71", "submissions": 24, "displaced": 8619, "agri": 2282.0, "schools": 14, "treated": 158, "livestock": 0, "homes": 829}], "raw": [{"date": "2026-05-21", "upazila": "Kurigram Sadar", "union": "up_3", "disaster": "Flood", "homes": 5, "agri": 55.0, "deaths": 99, "treated": 99, "schools": 5, "displaced": 6966, "needs": ""}, {"date": "2026-05-21", "upazila": "Ulipur", "union": "up_10", "disaster": "Flood", "homes": 20, "agri": 25.0, "deaths": 0, "treated": 5, "schools": 1, "displaced": 150, "needs": ""}, {"date": "2026-05-23", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 150, "agri": 140.0, "deaths": 0, "treated": 15, "schools": 0, "displaced": 450, "needs": "Sukna khabar"}, {"date": "2026-05-23", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 168, "agri": 280.0, "deaths": 1, "treated": 0, "schools": 0, "displaced": 450, "needs": "Climate change agriculture "}, {"date": "2026-05-23", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Heatwave, Flood, Drought, Cold Wave", "homes": 2, "agri": 27.0, "deaths": 0, "treated": 23, "schools": 1, "displaced": 5, "needs": "B"}, {"date": "2026-05-26", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Cold Wave, Heatwave, Drought, ", "homes": 2, "agri": 17.0, "deaths": 0, "treated": 50, "schools": 0, "displaced": 24, "needs": "Na"}, {"date": "2026-05-26", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 23, "agri": 65.0, "deaths": 0, "treated": 39, "schools": 1, "displaced": 20, "needs": "হ্যা"}, {"date": "2026-05-26", "upazila": "Bhurungamari", "union": "up_24", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "নদী ভাঙ্গন রোদে জিও ব্যাগের ব্যবস্থা করন"}, {"date": "2026-05-26", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Cold Wave, Drought, Flood, Hea", "homes": 335, "agri": 230.0, "deaths": 0, "treated": 120, "schools": 0, "displaced": 110, "needs": "Rasta meramot"}, {"date": "2026-05-26", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 20.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Nai"}, {"date": "2026-05-27", "upazila": "Nageshwari", "union": "up_17", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 175, "agri": 220.0, "deaths": 0, "treated": 65, "schools": 2, "displaced": 200, "needs": "Rasta meramot,bandal"}, {"date": "2026-05-27", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 20.0, "deaths": 0, "treated": 8, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-27", "upazila": "Chilmari", "union": "up_11", "disaster": "Rainfall", "homes": 0, "agri": 250.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 420, "needs": "Seed"}, {"date": "2026-05-27", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Flood", "homes": 0, "agri": 1100.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 750, "needs": "No"}, {"date": "2026-05-27", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Rainfall", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "নদী ভাঙ্গন রোধে জিও ব্যাগের প্রয়োজন"}, {"date": "2026-05-27", "upazila": "Nageshwari", "union": "up_21", "disaster": "Rainfall", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "সচেতনতা "}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-28", "upazila": "Ulipur", "union": "up_8", "disaster": "Drought", "homes": 0, "agri": 56.0, "deaths": 0, "treated": 5, "schools": 10, "displaced": 56, "needs": "Hhjk"}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 2.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 25, "needs": "Vegetable "}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_2", "disaster": "Rainfall, Flood", "homes": 2, "agri": 10.0, "deaths": 0, "treated": 0, "schools": 1, "displaced": 20, "needs": "Nai"}, {"date": "2026-05-28", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Na"}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_7", "disaster": "Rainfall", "homes": 15, "agri": 8.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-28", "upazila": "Chilmari", "union": "up_14", "disaster": "Heatwave", "homes": 0, "agri": 89.0, "deaths": 0, "treated": 8, "schools": 89, "displaced": 58, "needs": ""}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_2", "disaster": "Drought", "homes": 0, "agri": 9.0, "deaths": 0, "treated": 96, "schools": 5, "displaced": 59, "needs": ""}, {"date": "2026-05-29", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-29", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Flood", "homes": 0, "agri": 1050.0, "deaths": 0, "treated": 20, "schools": 3, "displaced": 360, "needs": "No"}, {"date": "2026-05-29", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "তাপমাত্রা আরো বেড়ে গেলে চিকিৎসা সেবার প্রয়োজন হবে "}, {"date": "2026-05-29", "upazila": "Nageshwari", "union": "up_18", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 145, "agri": 310.0, "deaths": 0, "treated": 20, "schools": 0, "displaced": 0, "needs": "Rasta meramot,sako toiri,bandal"}, {"date": "2026-05-29", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall", "homes": 0, "agri": 5.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 5, "needs": "T"}, {"date": "2026-05-29", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 4.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Nai"}, {"date": "2026-05-30", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 7.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 3, "needs": "Vegetable seed "}, {"date": "2026-05-30", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "No Comment "}, {"date": "2026-05-30", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 100, "agri": 200.0, "deaths": 0, "treated": 20, "schools": 0, "displaced": 200, "needs": "Rasta meratot"}, {"date": "2026-05-30", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 2, "agri": 40.0, "deaths": 0, "treated": 24, "schools": 2, "displaced": 11, "needs": ""}, {"date": "2026-05-30", "upazila": "Chilmari", "union": "up_15", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 24, "schools": 0, "displaced": 0, "needs": "Na"}, {"date": "2026-05-31", "upazila": "Rowmari", "union": "up_25", "disaster": "Flood, Rainfall", "homes": 0, "agri": 1100.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 380, "needs": "No"}, {"date": "2026-05-31", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 8, "needs": ""}, {"date": "2026-05-31", "upazila": "Nageshwari", "union": "up_20", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "সচেতনতা "}, {"date": "2026-05-31", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Heatwave, Cold Wave, Flood, Dr", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 30, "schools": 0, "displaced": 0, "needs": "Na"}], "generated": "2026-06-01 11:55"};
+const EMBEDDED = {"kpis": {"submissions": 40, "homes": 1144, "agri": 5359.0, "schools": 123, "deaths": 100, "treated": 695, "livestock": 118, "displaced": 10730}, "upazila": [{"name": "Kurigram Sadar", "submissions": 15, "homes": 49, "agri": 267.0, "schools": 15, "deaths": 99, "treated": 289, "livestock": 61, "displaced": 7117, "flood_villages": 20, "rain_villages": 50}, {"name": "Ulipur", "submissions": 6, "homes": 22, "agri": 103.0, "schools": 11, "deaths": 0, "treated": 90, "livestock": 10, "displaced": 235, "flood_villages": 4, "rain_villages": 56}, {"name": "Nageshwari", "submissions": 8, "homes": 905, "agri": 1120.0, "schools": 5, "deaths": 0, "treated": 264, "livestock": 39, "displaced": 960, "flood_villages": 129, "rain_villages": 118}, {"name": "Rowmari", "submissions": 4, "homes": 168, "agri": 3530.0, "schools": 3, "deaths": 1, "treated": 20, "livestock": 0, "displaced": 1940, "flood_villages": 46, "rain_villages": 28}, {"name": "Bhurungamari", "submissions": 4, "homes": 0, "agri": 0.0, "schools": 0, "deaths": 0, "treated": 0, "livestock": 0, "displaced": 0, "flood_villages": 0, "rain_villages": 25}, {"name": "Chilmari", "submissions": 3, "homes": 0, "agri": 339.0, "schools": 89, "deaths": 0, "treated": 32, "livestock": 8, "displaced": 478, "flood_villages": 0, "rain_villages": 5}], "disaster": [{"name": "Rainfall", "bn": "অতিবৃষ্টি", "color": "#4A90D9", "submissions": 30, "displaced": 1860, "agri": 2566.0, "schools": 0, "treated": 0, "livestock": 0, "homes": 315}, {"name": "Heatwave", "bn": "তাপদাহ", "color": "#E8743B", "submissions": 22, "displaced": 103, "agri": 144.0, "schools": 91, "treated": 103, "livestock": 52, "homes": 0}, {"name": "Cold Wave", "bn": "শৈত্যপ্রবাহ", "color": "#5B8FF9", "submissions": 19, "displaced": 0, "agri": 80.0, "schools": 3, "treated": 282, "livestock": 43, "homes": 0}, {"name": "Drought", "bn": "খরা", "color": "#E84040", "submissions": 20, "displaced": 148, "agri": 287.0, "schools": 15, "treated": 152, "livestock": 23, "homes": 0}, {"name": "Flood", "bn": "বন্যা", "color": "#2ECC71", "submissions": 24, "displaced": 8619, "agri": 2282.0, "schools": 14, "treated": 158, "livestock": 0, "homes": 829}], "raw": [{"date": "2026-05-21", "upazila": "Kurigram Sadar", "union": "up_3", "disaster": "Flood", "homes": 5, "agri": 55.0, "deaths": 99, "treated": 99, "schools": 5, "displaced": 6966, "needs": ""}, {"date": "2026-05-21", "upazila": "Ulipur", "union": "up_10", "disaster": "Flood", "homes": 20, "agri": 25.0, "deaths": 0, "treated": 5, "schools": 1, "displaced": 150, "needs": ""}, {"date": "2026-05-23", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 150, "agri": 140.0, "deaths": 0, "treated": 15, "schools": 0, "displaced": 450, "needs": "Sukna khabar"}, {"date": "2026-05-23", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 168, "agri": 280.0, "deaths": 1, "treated": 0, "schools": 0, "displaced": 450, "needs": "Climate change agriculture "}, {"date": "2026-05-23", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Heatwave, Flood, Drought, Cold Wave", "homes": 2, "agri": 27.0, "deaths": 0, "treated": 23, "schools": 1, "displaced": 5, "needs": "B"}, {"date": "2026-05-26", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Cold Wave, Heatwave, Drought, ", "homes": 2, "agri": 17.0, "deaths": 0, "treated": 50, "schools": 0, "displaced": 24, "needs": "Na"}, {"date": "2026-05-26", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 23, "agri": 65.0, "deaths": 0, "treated": 39, "schools": 1, "displaced": 20, "needs": "হ্যা"}, {"date": "2026-05-26", "upazila": "Bhurungamari", "union": "up_24", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "নদী ভাঙ্গন রোদে জিও ব্যাগের ব্যবস্থা করন"}, {"date": "2026-05-26", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Cold Wave, Drought, Flood, Hea", "homes": 335, "agri": 230.0, "deaths": 0, "treated": 120, "schools": 0, "displaced": 110, "needs": "Rasta meramot"}, {"date": "2026-05-26", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 20.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Nai"}, {"date": "2026-05-27", "upazila": "Nageshwari", "union": "up_17", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 175, "agri": 220.0, "deaths": 0, "treated": 65, "schools": 2, "displaced": 200, "needs": "Rasta meramot,bandal"}, {"date": "2026-05-27", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 20.0, "deaths": 0, "treated": 8, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-27", "upazila": "Chilmari", "union": "up_11", "disaster": "Rainfall", "homes": 0, "agri": 250.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 420, "needs": "Seed"}, {"date": "2026-05-27", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Flood", "homes": 0, "agri": 1100.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 750, "needs": "No"}, {"date": "2026-05-27", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Rainfall", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "নদী ভাঙ্গন রোধে জিও ব্যাগের প্রয়োজন"}, {"date": "2026-05-27", "upazila": "Nageshwari", "union": "up_21", "disaster": "Rainfall", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "সচেতনতা "}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-28", "upazila": "Ulipur", "union": "up_8", "disaster": "Drought", "homes": 0, "agri": 56.0, "deaths": 0, "treated": 5, "schools": 10, "displaced": 56, "needs": "Hhjk"}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 2.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 25, "needs": "Vegetable "}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_2", "disaster": "Rainfall, Flood", "homes": 2, "agri": 10.0, "deaths": 0, "treated": 0, "schools": 1, "displaced": 20, "needs": "Nai"}, {"date": "2026-05-28", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Na"}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_7", "disaster": "Rainfall", "homes": 15, "agri": 8.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-28", "upazila": "Chilmari", "union": "up_14", "disaster": "Heatwave", "homes": 0, "agri": 89.0, "deaths": 0, "treated": 8, "schools": 89, "displaced": 58, "needs": ""}, {"date": "2026-05-28", "upazila": "Kurigram Sadar", "union": "up_2", "disaster": "Drought", "homes": 0, "agri": 9.0, "deaths": 0, "treated": 96, "schools": 5, "displaced": 59, "needs": ""}, {"date": "2026-05-29", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": ""}, {"date": "2026-05-29", "upazila": "Rowmari", "union": "up_25", "disaster": "Rainfall, Flood", "homes": 0, "agri": 1050.0, "deaths": 0, "treated": 20, "schools": 3, "displaced": 360, "needs": "No"}, {"date": "2026-05-29", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "তাপমাত্রা আরো বেড়ে গেলে চিকিৎসা সেবার প্রয়োজন হবে "}, {"date": "2026-05-29", "upazila": "Nageshwari", "union": "up_18", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 145, "agri": 310.0, "deaths": 0, "treated": 20, "schools": 0, "displaced": 0, "needs": "Rasta meramot,sako toiri,bandal"}, {"date": "2026-05-29", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall", "homes": 0, "agri": 5.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 5, "needs": "T"}, {"date": "2026-05-29", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 4.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "Nai"}, {"date": "2026-05-30", "upazila": "Kurigram Sadar", "union": "up_1", "disaster": "Rainfall", "homes": 0, "agri": 7.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 3, "needs": "Vegetable seed "}, {"date": "2026-05-30", "upazila": "Bhurungamari", "union": "up_23", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "No Comment "}, {"date": "2026-05-30", "upazila": "Nageshwari", "union": "up_16", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 100, "agri": 200.0, "deaths": 0, "treated": 20, "schools": 0, "displaced": 200, "needs": "Rasta meratot"}, {"date": "2026-05-30", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 2, "agri": 40.0, "deaths": 0, "treated": 24, "schools": 2, "displaced": 11, "needs": ""}, {"date": "2026-05-30", "upazila": "Chilmari", "union": "up_15", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 24, "schools": 0, "displaced": 0, "needs": "Na"}, {"date": "2026-05-31", "upazila": "Rowmari", "union": "up_25", "disaster": "Flood, Rainfall", "homes": 0, "agri": 1100.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 380, "needs": "No"}, {"date": "2026-05-31", "upazila": "Kurigram Sadar", "union": "up_4", "disaster": "Rainfall, Heatwave, Cold Wave, Drought, ", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 8, "needs": ""}, {"date": "2026-05-31", "upazila": "Nageshwari", "union": "up_20", "disaster": "Heatwave", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 0, "schools": 0, "displaced": 0, "needs": "সচেতনতা "}, {"date": "2026-05-31", "upazila": "Ulipur", "union": "up_9", "disaster": "Rainfall, Heatwave, Cold Wave, Flood, Dr", "homes": 0, "agri": 0.0, "deaths": 0, "treated": 30, "schools": 0, "displaced": 0, "needs": "Na"}, {"date": "2026-06-01", "upazila": "Nageshwari", "union": "up_17", "disaster": "Cold Wave", "homes": 0, "agri": 20.0, "deaths": 0, "treated": 24, "schools": 3, "displaced": 0, "needs": "J"}], "generated": "2026-06-01 18:49"};
 
 let DATA = EMBEDDED;
 let activeUZ = 'all', activeDis = 'all';
@@ -316,11 +337,13 @@ function renderAll(d){
   renderUzChart(d.upazila);
   renderRaw(d.raw);
   const t = new Date();
-  document.getElementById('update-time').textContent = 'আপডেট: ' + t.toLocaleDateString('bn-BD') + ' ' + t.toLocaleTimeString('bn-BD',{hour:'2-digit',minute:'2-digit'});
+  const genTime = d.generated || '';
+  document.getElementById('update-time').textContent = genTime ? genTime : t.toLocaleDateString('en-GB') + ' ' + t.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
   document.getElementById('hero-sub').textContent = d.kpis.submissions;
   document.getElementById('hero-homes').textContent = d.kpis.homes.toLocaleString();
   document.getElementById('hero-agri').textContent = d.kpis.agri.toLocaleString();
   document.getElementById('hero-deaths').textContent = d.kpis.deaths;
+  initMap(d.raw || []);
   document.getElementById('footer-info').textContent = d.kpis.submissions + ' টি প্রতিবেদন · ' + d.generated + ' তারিখে আপডেট';
 }
 
@@ -450,6 +473,108 @@ function renderRaw(rows){
     </tr>`;
   }).join('');
 }
+
+// ── MAP ──
+function initMap(rawRows){
+  const mapDiv = document.getElementById('map');
+  if(!mapDiv) return;
+
+  // Remove placeholder
+  const ph = document.getElementById('map-placeholder');
+  if(ph) ph.style.display='none';
+
+  // Destroy existing map
+  if(window._leafletMap){ window._leafletMap.remove(); window._leafletMap=null; }
+
+  // Kurigram district center
+  const map = L.map('map').setView([25.80, 89.64], 10);
+  window._leafletMap = map;
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'© OpenStreetMap',maxZoom:18
+  }).addTo(map);
+
+  // District boundary box (approximate)
+  const bounds = [[25.50,89.30],[26.10,89.95]];
+  L.rectangle(bounds,{color:'#0D9488',weight:2,fillOpacity:0.05}).addTo(map);
+
+  const disColors = {
+    'Flood':'#0D9488','Rainfall':'#2563EB','Heatwave':'#EA580C',
+    'Cold Wave':'#0891B2','Drought':'#B45309','Unknown':'#64748B'
+  };
+
+  // Upazila center coordinates for Kurigram
+  const uzCoords = {
+    'Kurigram Sadar': [25.807, 89.636],
+    'Ulipur':         [25.673, 89.508],
+    'Chilmari':       [25.559, 89.676],
+    'Nageshwari':     [26.002, 89.894],
+    'Bhurungamari':   [26.114, 89.718],
+    'Rowmari':        [25.549, 89.757],
+    'Rajibpur':       [25.549, 89.840],
+  };
+
+  // Count by upazila and disaster for popups
+  const uzCount = {};
+  rawRows.forEach(r=>{
+    const uz = r.upazila || 'Unknown';
+    if(!uzCount[uz]) uzCount[uz]={total:0,disasters:{},homes:0,agri:0,deaths:0,treated:0};
+    uzCount[uz].total++;
+    uzCount[uz].homes += r.homes||0;
+    uzCount[uz].agri  += r.agri||0;
+    uzCount[uz].deaths+= r.deaths||0;
+    uzCount[uz].treated+=r.treated||0;
+    const dis = r.disaster||'Unknown';
+    uzCount[uz].disasters[dis]=(uzCount[uz].disasters[dis]||0)+1;
+  });
+
+  // Plot markers per upazila
+  Object.entries(uzCount).forEach(([uz,info])=>{
+    const coords = uzCoords[uz];
+    if(!coords) return;
+
+    const topDis = Object.entries(info.disasters).sort((a,b)=>b[1]-a[1])[0];
+    const color = topDis ? (disColors[topDis[0]]||'#64748B') : '#64748B';
+    const radius = Math.max(8, Math.min(30, info.total*3));
+
+    const marker = L.circleMarker(coords,{
+      radius: radius,
+      fillColor: color,
+      color: '#fff',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.8
+    }).addTo(map);
+
+    const disStr = Object.entries(info.disasters)
+      .map(([d,c])=>`${d}: ${c}`).join('<br>');
+
+    marker.bindPopup(`
+      <div style="font-family:Segoe UI,sans-serif;min-width:160px">
+        <div style="font-weight:700;font-size:13px;color:#0F172A;border-bottom:2px solid ${color};padding-bottom:4px;margin-bottom:8px">${uz}</div>
+        <div style="font-size:12px;color:#475569;line-height:1.8">
+          📋 Submissions: <strong>${info.total}</strong><br>
+          🏠 Homes: <strong>${info.homes}</strong><br>
+          🌾 Agri Land: <strong>${info.agri} bigha</strong><br>
+          💧 Deaths: <strong>${info.deaths}</strong><br>
+          🏥 Treated: <strong>${info.treated}</strong><br>
+          <br><strong>Disaster Types:</strong><br>${disStr}
+        </div>
+      </div>
+    `);
+  });
+
+  // Legend
+  const legend = document.getElementById('map-legend');
+  if(legend){
+    legend.innerHTML = Object.entries(disColors).slice(0,-1).map(([name,color])=>
+      `<span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#475569;background:#F8FAFC;padding:3px 8px;border-radius:6px;border:1px solid #E2E8F0">
+        <span style="width:10px;height:10px;border-radius:50%;background:${color};display:inline-block"></span>${name}
+      </span>`
+    ).join('');
+  }
+}
+
 </script>
 </body>
 </html>
